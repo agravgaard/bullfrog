@@ -243,9 +243,9 @@ public class WebDriverSetup {
         Files.asCharSink(adminFile, UTF_8).write("{\"web\":{\"port\":" + uiPort + "}}");
         Container container;
         if (Containers.useJavaagent()) {
-            container = new JavaagentContainer(testDir, true, ImmutableList.of());
+            container = new JavaagentContainer(testDir, true, ImmutableList.<String>of());
         } else {
-            container = new LocalContainer(testDir, true, ImmutableMap.of());
+            container = new LocalContainer(testDir, true, ImmutableMap.<String, String>of());
         }
         // wait for UI to be available (UI starts asynchronously in order to not block startup)
         CloseableHttpClient httpClient = HttpClients.custom()
