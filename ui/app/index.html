@@ -17,7 +17,10 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Glowroot</title>
+  <!-- intentionally not using <meta http-equiv="X-UA-Compatible" content="IE=edge">
+       and instead sending http response header X-UA-Compatible: IE=edge
+       see https://github.com/h5bp/html5-boilerplate/blob/master/src/doc/html.md#x-ua-compatible -->
+  <title>BullFrog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- this base href tag is replaced with server-side dynamic base href tag plus layout json object
@@ -84,7 +87,7 @@
     <div class="container align-items-stretch">
       <div class="navbar-brand align-items-center"
            style="margin-right: 1.25rem; margin-top: -0.25rem;">
-        Glowroot
+        BullFrog
       </div>
       <button class="gt-navbar-toggler d-flex d-md-none"
               type="button"
@@ -229,7 +232,7 @@
         ng-class="{'footer-tall': layout.central && isViewingAgent()}"
         role="contentinfo"
         id="footer">
-  <div ng-if="!layout.central">Glowroot version {{layout.glowrootVersion}}</div>
+  <div ng-if="!layout.central">BullFrog: Powered by <a href="https://glowroot.org/">Glowroot</a> - Glowroot version {{layout.glowrootVersion}}</div>
   <div ng-if="layout.central">Central collector version {{layout.glowrootVersion}}</div>
   <div ng-if="layout.central && isViewingAgent()">Agent version {{agentRollup.glowrootVersion}}</div>
 </footer>
