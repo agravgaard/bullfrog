@@ -359,6 +359,30 @@ public class MainEntryPoint {
         return ImmutableMap.copyOf(properties);
     }
 
+    private static void addProperties(File dir, Map<String, String> properties)
+            throws IOException {
+        File propFile = new File(dir, "bullfrog.properties");
+        if (!propFile.exists()) {
+            return;
+        }
+        // upgrade from 0.9.6 to 0.9.7
+        PropertiesFiles.upgradeIfNeeded(propFile,
+                ImmutableMap.of("agent.rollup=", "agent.rollup.id="));
+        // upgrade from 0.9.13 to 0.9.14
+        upgradeToCollectorAddressIfNeeded(propFile);
+        // upgrade from 0.9.26 to 0.9.27
+        addSchemeToCollectorAddressIfNeeded(propFile);
+        // upgrade from 0.9.28 to 0.10.0
+        prependAgentRollupToAgentIdIfNeeded(propFile);
+        Properties props = PropertiesFiles.load(propFile);
+        for (String key : props.stringPropertyNames()) {
+            String value = props.getProperty(key);
+            if (value != null) {
+                properties.put("glowroot." + key, value);
+            }
+        }
+    }
+
     @RequiresNonNull("startupLogger")
     private static void logAgentDirsLockedException(File confDir, File lockFile,
             Map<String, String> properties) {

@@ -177,7 +177,8 @@ public class CentralModule {
                     extra = ", this can be changed by adding the JVM arg -Dglowroot.central.dir=..."
                             + " to your servlet container startup";
                 }
-                startupLogger.info("Glowroot home: {}{}", centralDir.getAbsolutePath(), extra);
+                startupLogger.info("Glowroot home: {} (location for bullfrog.properties file{})",
+                        centralDir.getAbsolutePath(), extra);
             }
 
             CentralConfiguration centralConfig = getCentralConfiguration(directories.getConfDir());
@@ -440,14 +441,10 @@ public class CentralModule {
         startupLogger.info("Glowroot version: {}", version);
         startupLogger.info("Java version: {}", StandardSystemProperty.JAVA_VERSION.value());
 
-<<<<<<< HEAD
-        CentralConfiguration centralConfig = getCentralConfiguration(directories.getConfDir());
-=======
         File propFile = new File(centralDir, "bullfrog-central.properties");
         Properties props = PropertiesFiles.load(propFile);
         CentralConfiguration centralConfig = getCentralConfiguration(props);
 
->>>>>>> 8b9619322... Changed the naming for the central server properties
         Session session = null;
         Cluster cluster = null;
         ExecutorService repoAsyncExecutor = null;
@@ -567,14 +564,10 @@ public class CentralModule {
         startupLogger.info("Glowroot version: {}", version);
         startupLogger.info("Java version: {}", StandardSystemProperty.JAVA_VERSION.value());
 
-<<<<<<< HEAD
-        CentralConfiguration centralConfig = getCentralConfiguration(directories.getConfDir());
-=======
         File propFile = new File(centralDir, "bullfrog-central.properties");
         Properties props = PropertiesFiles.load(propFile);
         CentralConfiguration centralConfig = getCentralConfiguration(props);
 
->>>>>>> 8b9619322... Changed the naming for the central server properties
         Session session = null;
         Cluster cluster = null;
         ExecutorService repoAsyncExecutor = null;
@@ -736,17 +729,10 @@ public class CentralModule {
 
     private static Map<String, String> getPropertiesFromConfigFile(File confDir)
             throws IOException {
-<<<<<<< HEAD
-        File propFile = new File(confDir, "glowroot-central.properties");
-        if (!propFile.exists()) {
-            // upgrade from 0.9.5 to 0.9.6
-            File oldPropFile = new File(confDir, "glowroot-server.properties");
-=======
         File propFile = new File(centralDir, "bullfrog-central.properties");
         if (!propFile.exists()) {
             // upgrade from 0.9.5 to 0.9.6
             File oldPropFile = new File(centralDir, "bullfrog-server.properties");
->>>>>>> 8b9619322... Changed the naming for the central server properties
             if (!oldPropFile.exists()) {
                 return ImmutableMap.of();
             }
@@ -1039,7 +1025,7 @@ public class CentralModule {
         List<String> cassandraContactPoint() {
             return ImmutableList.of("127.0.0.1");
         }
-        
+
         @Value.Default
         int cassandraPort() {
         	return 9042;
@@ -1054,7 +1040,7 @@ public class CentralModule {
         String cassandraPassword() {
             return "";
         }
-        
+
         @Value.Default
         boolean cassandraSSL() {
         	return false;

@@ -61,6 +61,18 @@ public class Directories {
         this.glowrootJarFile = glowrootJarFile;
         glowrootDir = getGlowrootDir(glowrootJarFile);
 
+        // check for bullfrog.properties file in glowrootDir
+        File propFile = new File(glowrootDir, "bullfrog.properties");
+        props = new Properties();
+        if (propFile.exists()) {
+            InputStream in = new FileInputStream(propFile);
+            try {
+                props.load(in);
+            } finally {
+                in.close();
+            }
+        }
+
         File pluginsDir = new File(glowrootDir, "plugins");
         this.pluginsDir = pluginsDir.exists() ? pluginsDir : null;
 
